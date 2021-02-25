@@ -28,7 +28,7 @@ type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElemen
 type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>
 // Partial将属性都变成可选的
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
-
+// Buttonprops 是props的类型
 const Button: React.FC<ButtonProps> = (props) => {
   const { btnType,
     className, //用户自定义的classname

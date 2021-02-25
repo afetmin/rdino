@@ -35,3 +35,17 @@
         border-color: $border;
     }
 }
+
+@mixin alert-style($background,
+    $color,
+    $hover-background: lighten($background, 7.5%),
+    $hover-color: $color,
+) {
+    color: $color;
+    background: $background;
+
+    &:hover {
+        color: $hover-color;
+        background: $hover-background;
+    }
+}

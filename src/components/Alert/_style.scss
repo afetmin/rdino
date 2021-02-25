@@ -1,0 +1,40 @@
+.alert {
+    position: relative;
+    line-height: $line-height-base;
+    color: $white;
+    width: 500px;
+    box-shadow: $btn-box-shadow;
+    cursor: pointer;
+    transition: $btn-transition;
+    padding: $btn-padding-y-lg $btn-padding-x-lg;
+    border-radius: $border-radius;
+    .alert-title {
+      font-weight: $font-weight-bold;
+      padding: $btn-padding-y 0;
+    }
+    .alert-description {
+      font-size: $font-size-sm;
+    }
+    .alert-close-icon {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: $white;
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+}
+
+.alert-default {
+    @include alert-style($primary, $white)
+}
+.alert-success {
+  @include alert-style($success, $white)
+}
+.alert-danger {
+  @include alert-style($danger, $white)
+}
+.alert-warning {
+  @include alert-style($warning, $white)
+}
