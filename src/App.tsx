@@ -13,7 +13,7 @@ function App() {
         <Button btnType={ButtonType.Link} href='http://www.baidu.com' disabled>Disabled Link</Button>
         <Alert type={AlertType.Default} closable title={'标题'} description={'描述'} onClose={() => {alert(123)}}></Alert>
         <Alert type={AlertType.Success} closable title={'标题'} description={'描述'} onClose={() => {alert(123)}}></Alert>
-        <Alert type={AlertType.Danger} closable title={'标题'} description={'描述'} onClose={() => {alert(123)}}></Alert>
+        <Alert type={AlertType.Danger} closable title={'标题'} onClose={() => {alert(123)}}></Alert>
         <Alert type={AlertType.Warning} closable title={'标题'} description={'描述'} onClose={() => {alert(123)}}></Alert>
       </header>
     </div>
