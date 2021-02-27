@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 import classNames from 'classnames'
 
 export enum AlertType {
@@ -16,8 +16,8 @@ interface BaseAlertProps {
   type?: AlertType;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
 }
-
-const Alert: React.FC<BaseAlertProps> = (props) => {
+type AlertProps = Partial<BaseAlertProps & HTMLAttributes<HTMLElement>>
+const Alert: React.FC<AlertProps> = (props) => {
   const {
     type,
     description,
