@@ -4,6 +4,7 @@ import Alert, { AlertType } from './components/Alert/alert'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu'
+import Input from './components/Input/input'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -12,6 +13,11 @@ library.add(fas)
 function App() {
   return (
     <div className="App">
+      <Input prepend='QQ' style={{width:'500px'}}></Input>
+      <Input disabled></Input>
+      <Input size='sm'></Input>
+      <Input icon={'angle-down'}></Input>
+      <Input append='.com'></Input>
       <header className="App-header">
         <Menu defaultIndex={'0'}>
           <MenuItem index={'0'}>link1</MenuItem>
