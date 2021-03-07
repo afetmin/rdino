@@ -1,10 +1,12 @@
 import React from 'react';
-import Button, { ButtonType, ButtonSize } from './components/Button/button'
+import Button, { ButtonSize } from './components/Button/button'
 import Alert, { AlertType } from './components/Alert/alert'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu'
 import Input from './components/Input/input'
+import Upload from './components/Upload/upload'
+
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -13,7 +15,7 @@ library.add(fas)
 function App() {
   return (
     <div className="App">
-      <Input prepend='QQ' style={{width:'500px'}}></Input>
+      <Input prepend='QQ' style={{ width: '500px' }}></Input>
       <Input disabled></Input>
       <Input size='sm'></Input>
       <Input icon={'angle-down'}></Input>
@@ -30,15 +32,16 @@ function App() {
         </Menu>
         <Button>Hello</Button>
         <Button disabled>disabled button</Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>Large Primary</Button>
-        <Button btnType={ButtonType.Danger} size={ButtonSize.Small}>Small danger</Button>
-        <Button btnType={ButtonType.Link} href='http://www.baidu.com'>Link</Button>
-        <Button btnType={ButtonType.Link} href='http://www.baidu.com' disabled>Disabled Link</Button>
+        <Button btnType='primary' size={ButtonSize.Large}>Large Primary</Button>
+        <Button btnType='danger' size={ButtonSize.Small}>Small danger</Button>
+        <Button btnType='link' href='http://www.baidu.com'>Link</Button>
+        <Button btnType='link' href='http://www.baidu.com' disabled>Disabled Link</Button>
         <Alert type={AlertType.Default} closable title={'标题'} description={'描述'} onClose={() => { alert(123) }}></Alert>
         <Alert type={AlertType.Success} closable title={'标题'} description={'描述'} onClose={() => { alert(123) }}></Alert>
         <Alert type={AlertType.Danger} closable title={'标题'} onClose={() => { alert(123) }}></Alert>
         <Alert type={AlertType.Warning} closable title={'标题'} description={'描述'} onClose={() => { alert(123) }}></Alert>
       </header>
+      <Upload action='http://jsonplaceholder.typicode.com/posts'></Upload>
     </div>
   );
 }
