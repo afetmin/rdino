@@ -1,8 +1,20 @@
-import React, { ChangeEvent, useRef } from 'react'
+import React, { ChangeEvent, useRef, useState } from 'react'
 import axios from 'axios'
 
 import Button from '../Button/button'
 
+export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
+
+export interface UploadFile {
+  uid: string;
+  size: number;
+  name: string;
+  status?: UploadFileStatus;
+  percent?: number;
+  raw?: File;
+  response?: any;
+  error?: any;
+}
 
 export interface UploadProps {
   action: string;
@@ -23,6 +35,21 @@ export const Upload: React.FC<UploadProps> = (props) => {
     onChange,
   } = props
   const fileInput = useRef<HTMLInputElement>(null)
+  const [fileList, setFileList] = useState<UploadFile[]>([])
+  // 更新文件列表的方法，(需要更新的文件，更新文件某个内容)
+  const updateFileList = (updateFile: UploadFile, updateObj: Partial<UploadFile>) => {
+    // setFileList 为异步方法，为实时更新内容，传入一个函数可以获得prev值
+    setFileList(prevList => {
+      return prevList.map(file => {
+        if (file.uid === updateFile.uid) {
+          return { ...file, ...updateObj }
+        } else {
+          return file
+        }
+      })
+    })
+  }
+
   const handleClick = () => {
     if (fileInput.current) {
       fileInput.current.click()
@@ -54,6 +81,15 @@ export const Upload: React.FC<UploadProps> = (props) => {
     }))
   }
   const post = (file: File) => {
+    let _file: UploadFile = {
+      uid: Date.now() + 'upload-file',
+      status: 'ready',
+      name: file.name,
+      size: file.size,
+      percent: 0,
+      raw: file
+    }
+    setFileList([_file, ...fileList])
     const formData = new FormData()
     formData.append(file.name, file)
     axios.post(action, formData, {
@@ -62,6 +98,8 @@ export const Upload: React.FC<UploadProps> = (props) => {
       },
       onUploadProgress: (e) => {
         let percentage = Math.round((e.loaded * 100) / e.total) || 0
+        // 更新当前文件数据
+        updateFileList(_file, { percent: percentage, status: 'uploading' })
         if (percentage < 100) {
           if (onProgress) {
             onProgress(percentage, file)
@@ -70,6 +108,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
       }
     }).then(res => {
       console.log(res);
+      updateFileList(_file, { status: 'success', response: res.data })
       if (onSuccess) {
         onSuccess(res.data, file)
       }
@@ -78,6 +117,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
       }
     }).catch(err => {
       console.log(err);
+      updateFileList(_file, { status: 'error', error: err })
       if (onError) {
         onError(err, file)
       }
@@ -86,6 +126,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
       }
     })
   }
+  console.log(fileList);
   return (
     <div className="rdino-upload">
       <Button
