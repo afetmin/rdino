@@ -5,14 +5,17 @@ import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu'
 import Input from './components/Input/input'
-import Upload from './components/Upload/upload'
-
+import Upload, { UploadFile } from './components/Upload/upload'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 library.add(fas)
 
 function App() {
+  const defaultFileList: UploadFile[] = [
+    { uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 30 },
+    { uid: '122', size: 1234, name: 'xyz.md', status: 'success', percent: 30 },
+    { uid: '121', size: 1234, name: 'eyiha.md', status: 'error', percent: 30 }]
   return (
     <div className="App">
       <Input prepend='QQ' style={{ width: '500px' }}></Input>
@@ -41,7 +44,7 @@ function App() {
         <Alert type={AlertType.Danger} closable title={'标题'} onClose={() => { alert(123) }}></Alert>
         <Alert type={AlertType.Warning} closable title={'标题'} description={'描述'} onClose={() => { alert(123) }}></Alert>
       </header>
-      <Upload action='http://jsonplaceholder.typicode.com/posts'></Upload>
+      <Upload defaultFileList={defaultFileList} action='http://jsonplaceholder.typicode.com/posts'></Upload>
     </div>
   );
 }

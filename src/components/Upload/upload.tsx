@@ -2,7 +2,7 @@ import React, { ChangeEvent, useRef, useState } from 'react'
 import axios from 'axios'
 
 import Button from '../Button/button'
-
+import UploadList from './uploadList'
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
 
 export interface UploadFile {
@@ -18,24 +18,28 @@ export interface UploadFile {
 
 export interface UploadProps {
   action: string;
+  defaultFileList?: UploadFile[];
   beforeUpload?: (file: File) => boolean | Promise<File>;
   onProgress?: (percentage: number, file: File) => void;
   onSuccess?: (data: any, file: File) => void;
   onError?: (err: any, file: File) => void;
   onChange?: (file: File) => void;
+  onRemove?: (file: UploadFile) => void;
 }
 
 export const Upload: React.FC<UploadProps> = (props) => {
   const {
     action,
+    defaultFileList,
     beforeUpload,
     onProgress,
     onSuccess,
     onError,
     onChange,
+    onRemove,
   } = props
   const fileInput = useRef<HTMLInputElement>(null)
-  const [fileList, setFileList] = useState<UploadFile[]>([])
+  const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
   // 更新文件列表的方法，(需要更新的文件，更新文件某个内容)
   const updateFileList = (updateFile: UploadFile, updateObj: Partial<UploadFile>) => {
     // setFileList 为异步方法，为实时更新内容，传入一个函数可以获得prev值
@@ -49,7 +53,12 @@ export const Upload: React.FC<UploadProps> = (props) => {
       })
     })
   }
-
+  const handleRemove = (file: UploadFile) => {
+    setFileList((prevList) => {
+      return prevList.filter(item => item.uid !== file.uid)
+    })
+    if (onRemove) onRemove(file)
+  }
   const handleClick = () => {
     if (fileInput.current) {
       fileInput.current.click()
@@ -140,6 +149,10 @@ export const Upload: React.FC<UploadProps> = (props) => {
         ref={fileInput}
         onChange={handleFileChange}
       />
+      <UploadList
+        fileList={fileList}
+        onRemove={handleRemove}
+      ></UploadList>
     </div>
   )
 }
