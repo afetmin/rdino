@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useRef, useState } from 'react'
 import axios from 'axios'
 
-import Button from '../Button/button'
 import UploadList from './uploadList'
+import Dragger from './dragger'
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
 
 export interface UploadFile {
@@ -163,24 +163,33 @@ export const Upload: React.FC<UploadProps> = (props) => {
   }
   console.log(fileList);
   return (
-    <div className="rdino-upload">
-      <Button
-        btnType="primary"
-        onClick={handleClick}
-      >上传文件</Button>
-      <input
-        type="file"
-        className="rdino-file-input"
-        style={{ display: 'none' }}
-        ref={fileInput}
-        onChange={handleFileChange}
-        accept={accept}
-        multiple={multiple}
-      />
+    <div
+      className="rdino-upload-component"
+    >
+      <div className="rdino-upload-input"
+        style={{display: 'inline-block'}}
+        onClick={handleClick}>
+          {drag ?
+            <Dragger onFile={(files) => {uploadFiles(files)}}>
+              {children}
+            </Dragger>:
+            children
+          }
+        <input
+          className="rdino-file-input"
+          style={{display: 'none'}}
+          ref={fileInput}
+          onChange={handleFileChange}
+          type="file"
+          accept={accept}
+          multiple={multiple}
+        />
+      </div>
+
       <UploadList
         fileList={fileList}
         onRemove={handleRemove}
-      ></UploadList>
+      />
     </div>
   )
 }

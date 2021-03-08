@@ -44,7 +44,7 @@ function App() {
         <Alert type={AlertType.Danger} closable title={'标题'} onClose={() => { alert(123) }}></Alert>
         <Alert type={AlertType.Warning} closable title={'标题'} description={'描述'} onClose={() => { alert(123) }}></Alert>
       </header>
-      <Upload defaultFileList={defaultFileList} action='http://jsonplaceholder.typicode.com/posts'></Upload>
+      <Upload drag defaultFileList={defaultFileList} action='http://jsonplaceholder.typicode.com/posts'></Upload>
     </div>
   );
 }
