@@ -1,7 +1,21 @@
 {
   "name": "rdino",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "description": "React components",
+  "author": "afetmin",
+  "main": "build/index.js",
+  "module": "build/index.js",
+  "types": "build/index.d.ts",
+  "license": "MIT",
+  "keywords": [
+    "Component",
+    "React"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afetmin/rdino"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",

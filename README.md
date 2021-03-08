@@ -1,45 +1,18 @@
 # 项目
 React+TypeScript+jest 打造自己的组件库
 
-## Available Scripts
+## 技术栈
+- ***React***  : creat-react-app
+- ***TypeScript***：静态语言支持
+- ***FontAwesome***：图标
+- ***transition***：react-transition-group 动画
+- ***jest***：testing-library 测试框架
+- ***ES6***
+- ***SCSS***
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 我学到的
+- React+TypeScript 打造组件库的一整套流程， 样式文件组织->开发和文档->组件测试->npm发布。
+- 学习了interface定义、泛型使用、React hooks使用、state如何实时获取状态、项目构建发布流程等。
+- 一个大型项目不是一蹴而就的，从简单入手，逐步完善需求，渐进式开发。
+## 效果
+![展示](./static/home.png)
