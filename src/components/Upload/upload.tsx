@@ -25,6 +25,13 @@ export interface UploadProps {
   onError?: (err: any, file: File) => void;
   onChange?: (file: File) => void;
   onRemove?: (file: UploadFile) => void;
+  headers?: { [key: string]: any };
+  name?: string;
+  data?: { [key: string]: any };
+  withCredentials?: boolean;
+  accept?: string;
+  multiple?: boolean;
+  drag?: boolean;
 }
 
 export const Upload: React.FC<UploadProps> = (props) => {
@@ -37,6 +44,14 @@ export const Upload: React.FC<UploadProps> = (props) => {
     onError,
     onChange,
     onRemove,
+    name,
+    headers,
+    data,
+    withCredentials,
+    accept,
+    multiple,
+    children,
+    drag,
   } = props
   const fileInput = useRef<HTMLInputElement>(null)
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
@@ -98,13 +113,24 @@ export const Upload: React.FC<UploadProps> = (props) => {
       percent: 0,
       raw: file
     }
-    setFileList([_file, ...fileList])
+    // setFileList([_file, ...fileList])
+    // bug:上传多个文件时，只会有最后一个文件展示
+    setFileList(prevList => {
+      return [_file, ...prevList]
+    })
     const formData = new FormData()
-    formData.append(file.name, file)
+    formData.append(name || 'file', file)
+    if (data) {
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key])
+      });
+    }
     axios.post(action, formData, {
       headers: {
+        ...headers,
         'Content-Type': 'multipart/form-data'
       },
+      withCredentials,
       onUploadProgress: (e) => {
         let percentage = Math.round((e.loaded * 100) / e.total) || 0
         // 更新当前文件数据
@@ -148,6 +174,8 @@ export const Upload: React.FC<UploadProps> = (props) => {
         style={{ display: 'none' }}
         ref={fileInput}
         onChange={handleFileChange}
+        accept={accept}
+        multiple={multiple}
       />
       <UploadList
         fileList={fileList}
@@ -156,5 +184,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
     </div>
   )
 }
-
+Upload.defaultProps = {
+  name: 'file'
+}
 export default Upload
