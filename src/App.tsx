@@ -7,10 +7,6 @@ import SubMenu from './components/Menu/subMenu'
 import Input from './components/Input/input'
 import Upload, { UploadFile } from './components/Upload/upload'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-library.add(fas)
-
 function App() {
   const defaultFileList: UploadFile[] = [
     { uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 30 },
