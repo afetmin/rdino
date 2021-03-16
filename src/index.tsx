@@ -1,6 +1,13 @@
+// import React from 'react';
+// import {render} from 'react-dom'
+// import App from './App'
+// import './common/scss/index.scss'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 library.add(fas)
+
+// render(<App></App>,document.getElementById('root'))
+
 
 export { default as Button } from './components/Button'
 export { default as Menu } from './components/Menu'
